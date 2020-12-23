@@ -30,7 +30,7 @@ const Login = (): JSX.Element => {
                     const response = await userServiceInstance.loginUser(userData)
                     localStorage.setItem('refresh', response.data.refresh)
                     localStorage.setItem('access', response.data.access)
-                    window.location.href = "http://localhost:3000/"
+                    window.location.href = 'https://' + process.env.REACT_APP_API_URL
                 } catch(error) {
                     alert("bad password or email")
                 }
