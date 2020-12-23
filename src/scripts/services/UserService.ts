@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 // type TAxiosInstanceType = 'unauthed' | 'authed' | 'create_profile';
 
 class UserService {
-	private API_URL: string = 'http://' + process.env.REACT_APP_API_URL;
+	private API_URL: string = 'https://' + process.env.REACT_APP_API_URL;
 	private axiosInstanceUnAuth: AxiosInstance;
 	private axiosInstanceCreateProfile: AxiosInstance;
 	private axiosInstance: AxiosInstance;
