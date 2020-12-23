@@ -5,7 +5,7 @@ const Registration = (): JSX.Element => {
     const handlerLogout = () => {
 		localStorage.removeItem('refresh');
 		localStorage.removeItem('access');
-		window.location.href = 'https://' + process.env.REACT_APP_API_URL + '/login'
+		window.location.href = 'https://' + process.env.REACT_APP_FRONT_URL + '/login'
     }
 	const handleFormSubmit = (event: any) => {
         event.preventDefault();
