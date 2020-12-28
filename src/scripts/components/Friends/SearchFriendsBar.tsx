@@ -1,33 +1,34 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import ReloadSearchFriendsResultsContext from '../../contexts/ReloadSearchFriendsResultsContext';
-import userServiceInstance from '../../services/UserService';
-import TUseState from '../../typescript/TUseState';
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import ReloadSearchFriendsResultsContext from '../../contexts/ReloadSearchFriendsResultsContext'
+import userServiceInstance from '../../services/UserService'
+import TUseState from '../../typescript/TUseState'
  
 const SearchFriendsBar = (): JSX.Element => {
-    const searchInput = useRef(null);
+    const searchInput = useRef(null)
     const [searchInputVal, setsearchInputVal] = useState('') as TUseState<'' | string>
-    const reloadSearchFriendsResultsContext = useContext(ReloadSearchFriendsResultsContext);
-    let timer: null | NodeJS.Timeout = null;
-    const refTimer = useRef(timer) as React.MutableRefObject<null | NodeJS.Timeout>;
+    const reloadSearchFriendsResultsContext = useContext(ReloadSearchFriendsResultsContext)
+    let timer: null | NodeJS.Timeout = null
+    const refTimer = useRef(timer) as React.MutableRefObject<null | NodeJS.Timeout>
 
     const handlerClickSearchFriends = (e: any) => {
         e.preventDefault()
         if (e.key === 'Enter') {
             const fetchData = async () => {
                 try {
-                    const response = await userServiceInstance.getListUsersByQueryString(searchInputVal);
-                    if (JSON.parse(response.data) === 'none') {
+                    const response = await userServiceInstance.getListUsersByQueryString(searchInputVal)
+                    console.log(response.data)
+                    if (response.data === 'none') {
                         reloadSearchFriendsResultsContext.setListFoundUsers([])
                     } else {
-                        const data = JSON.parse(response.data);
+                        const data = response.data
                         reloadSearchFriendsResultsContext.setListFoundUsers(data)
-                        console.log(data);
+                        console.log(data)
                     }
                 } catch(error) {
-                    console.log(error, 'error');
+                    console.log(error, 'error')
                 }
             }
-            fetchData();
+            fetchData()
         }
     }
     useEffect(() => {
@@ -36,39 +37,40 @@ const SearchFriendsBar = (): JSX.Element => {
                 refTimer.current = setTimeout(() => {
                     const fetchData = async () => {
                         try {
-                            const response = await userServiceInstance.getListUsersByQueryString(searchInputVal);
-                            if (JSON.parse(response.data) === 'none') {
+                            const response = await userServiceInstance.getListUsersByQueryString(searchInputVal)
+                            console.log(response.data)
+                            if (response.data === 'none') {
                                 reloadSearchFriendsResultsContext.setListFoundUsers([])
                             } else {
-                                const data = JSON.parse(response.data);
+                                const data = response.data
                                 reloadSearchFriendsResultsContext.setListFoundUsers(data)
-                                console.log(data);
+                                console.log(data)
                             }
                         } catch(error) {
-                            console.log(error, 'error');
+                            console.log(error, 'error')
                         }
                     }
-                    fetchData();
-                }, 250);
+                    fetchData()
+                }, 250)
             } else {
-                clearTimeout(refTimer.current);
+                clearTimeout(refTimer.current)
                 refTimer.current = setTimeout(() => {
                     const fetchData = async () => {
                         try {
-                            const response = await userServiceInstance.getListUsersByQueryString(searchInputVal);
-                            if (JSON.parse(response.data) === 'none') {
+                            const response = await userServiceInstance.getListUsersByQueryString(searchInputVal)
+                            if (response.data === 'none') {
                                 reloadSearchFriendsResultsContext.setListFoundUsers([])
                             } else {
-                                const data = JSON.parse(response.data);
+                                const data = response.data
                                 reloadSearchFriendsResultsContext.setListFoundUsers(data)
-                                console.log(data);
+                                console.log(data)
                             }
                         } catch(error) {
-                            console.log(error, 'error');
+                            console.log(error, 'error')
                         }
                     }
-                    fetchData();
-                }, 250);
+                    fetchData()
+                }, 250)
             }
             console.log(searchInputVal)
         }
@@ -84,8 +86,8 @@ const SearchFriendsBar = (): JSX.Element => {
                     value={searchInputVal} 
                     onChange={
                         (e) => {
-                            const target = e.target as HTMLInputElement; 
-                            return setsearchInputVal(target.value);
+                            const target = e.target as HTMLInputElement 
+                            return setsearchInputVal(target.value)
                         }
                     }
                     />
@@ -93,7 +95,7 @@ const SearchFriendsBar = (): JSX.Element => {
                 <img className="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" alt="search-icon" />
             </span>
         </form>
-    );
+    )
 }
  
-export default SearchFriendsBar;
+export default SearchFriendsBar

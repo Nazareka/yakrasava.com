@@ -39,7 +39,7 @@ class WebSocketService {
         this.chats = {}
         this.current_chat = {}
         this.profiles = []
-        this.endpoint = "ws://" + process.env.REACT_APP_API_URL + "/ws/user"
+        this.endpoint = (process.env.REACT_APP_API_WEBSOCKETS_URL || "ws://localhost:8000") + "/ws/user"
     }
 
     connect(){

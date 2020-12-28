@@ -19,7 +19,7 @@ const Chats = (): JSX.Element => {
         const fetchData = async () => {
             try {
                 const response = await userServiceInstance.getAllChats()
-                setChats(JSON.parse(response.data))
+                setChats(response.data)
             } catch(error) {
                 console.log(error, 'error')
             }
@@ -92,17 +92,15 @@ const Chats = (): JSX.Element => {
                     <div className="chat" onClick={() => OpenChatHandle(chat.id)}>
                         <div className='logo'>
                             <img src={
-                                "http://" + process.env.REACT_APP_FRONT_URL + "/static" + (
                                 isSavedMessageChat(chat)
                                 ?
-                                '/assets/imageProfile_Z4FecWx.png'
+                                'https://yakrasava-com.s3.eu-north-1.amazonaws.com/static/Saved_Messages_icon.png'
                                 :
                                 isPrivateChat(chat)
                                 ?
                                 chat.profile.image
                                 :
-                                null
-                                )
+                                ''
                             }
                                 alt='chat-logo' />
                         </div>

@@ -20,7 +20,7 @@ const getStatusNameByStatusCode = ({ status_code, related}: getStatusNameByStatu
     } else if (status_code === 'follow' && related === 'from') {
         return 'follow'          
     } else if (status_code === 'none' && related === 'none') {
-        return ''           
+        return 'none'           
     } else {
         throw new Error('unexpected error: getStatusNameByStatusCode');
     }

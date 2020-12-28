@@ -114,7 +114,7 @@ const Friends = (): JSX.Element => {
                     listFoundUsers.map( (profile) =>
                         <div>
                             <div className="img-profile-container">
-                                <img src={"http://" + process.env.REACT_APP_API_URL + "/static" + profile.image } 
+                                <img src={ profile.image } 
                                     className="profile"
                                     width="100px"
                                     height="135px"
@@ -142,7 +142,7 @@ const Friends = (): JSX.Element => {
                     listFriends.map( (profile) =>
                         <div>
                             <div className="img-profile-container">
-                                    <img src={"http://" + process.env.REACT_APP_API_URL + "/static" + profile.image } 
+                                    <img src={ profile.image } 
                                         className="profile"
                                         width="100px"
                                         height="135px"
@@ -170,7 +170,7 @@ const Friends = (): JSX.Element => {
                     listFollowers.map( (profile) =>
                         <div>
                             <div className="img-profile-container">
-                                <img src={"http://" + process.env.REACT_APP_API_URL + "/static" + profile.image } 
+                                <img src={ profile.image } 
                                     className="profile"
                                     width="100px"
                                     height="135px"
@@ -198,7 +198,7 @@ const Friends = (): JSX.Element => {
                     listFollows.map( (profile) =>
                         <div>
                             <div className="img-profile-container">
-                                <img src={"http://" + process.env.REACT_APP_API_URL + "/static" + profile.image } 
+                                <img src={ profile.image } 
                                     className="profile"
                                     width="100px"
                                     height="135px"

@@ -1,16 +1,16 @@
-import React from 'react';
-import userServiceInstance from '../../services/UserService';
+import React from 'react'
+import userServiceInstance from '../../services/UserService'
 
 const Registration = (): JSX.Element => {
     const handlerLogout = () => {
-		localStorage.removeItem('refresh');
-		localStorage.removeItem('access');
-		window.location.href = 'https://' + process.env.REACT_APP_FRONT_URL + '/login'
+		localStorage.removeItem('refresh')
+		localStorage.removeItem('access')
+		window.location.href = process.env.REACT_APP_FRONT_URL || 'https://localhost:3000' + '/login'
     }
 	const handleFormSubmit = (event: any) => {
-        event.preventDefault();
-    	const formData: any = new FormData(event.target);
-    	const [nickname, email, password, reapet_password] = formData;
+        event.preventDefault()
+    	const formData: any = new FormData(event.target)
+    	const [nickname, email, password, reapet_password] = formData
     	const userData = {
     		user: {
     			nickname: nickname[1].toString(),
@@ -19,24 +19,25 @@ const Registration = (): JSX.Element => {
                 reapet_password: reapet_password[1].toString()
     		}
         }
-        console.log(userData);
+        console.log(userData)
         const validation = () => {
-            let is_valid = false;
-            if (userData.user.nickname.length < 4) {
-                alert('nickname must be more than 4 letters')
-            } else if (! /^[a-zA-Z]+$/.test(userData.user.nickname)) {
-                alert('nickname must contain not only numbers') 
-            // eslint-disable-next-line no-useless-escape
-            } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userData.user.email)) {
+            let is_valid = false
+            // if (userData.user.nickname.length < 4) {
+            //     alert('nickname must be more than 4 letters')
+            // } else if (!/^[A-Za-z][A-Za-z0-9_]+$/.test(userData.user.nickname)) {
+            //     alert('nickname must start with letter and contain only numbers, letters and underscore') 
+            // // eslint-disable-next-line no-useless-escape
+            // } else 
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userData.user.email)) {
                 alert('email is not valid')
             } else if (userData.user.password.length < 8) {
                 alert('password must be more than 8 characters')
             } else if (userData.user.password !== userData.user.reapet_password) {
                 alert("passwords aren't the same")
             } else {
-                is_valid = true;
+                is_valid = true
             }
-            return is_valid;
+            return is_valid
 
         }
         if (validation() === true) {
@@ -44,24 +45,24 @@ const Registration = (): JSX.Element => {
                 try {
                     const response = await userServiceInstance.createUser(userData)
                     if (response.data.response === 'profile is not valid') {
-                        alert("server error. Please reload page");
+                        alert("server error. Please reload page")
                     } else if (response.data.response === 'validation_error') {
-                        const messageObject = response.data.message;
+                        const messageObject = response.data.message
                         const firstMessage = messageObject[Object.keys(messageObject)[0]]
-                        console.log(firstMessage);
-                        alert(firstMessage);
+                        console.log(firstMessage)
+                        alert(firstMessage)
                     } else {
                         handlerLogout()
                     }
                 } catch(error) {
                     if (error.data.response === 'profile is not valid') {
-                        alert("server error. Please reload page");
+                        alert("server error. Please reload page")
                     } else if (error.data.response === 'validation_error') {
                         alert(error.data.message[0])
                     }
                 }
             }
-            fetchData();
+            fetchData()
         }
    	}
 	return (
@@ -103,7 +104,7 @@ const Registration = (): JSX.Element => {
                 </form>
             </div>
       </div>
-	);
+	)
 }
 
-export default Registration;
+export default Registration

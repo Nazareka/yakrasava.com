@@ -27,14 +27,14 @@ const FriendDropdown = ({ id, status_code, related }: IFriendDropdownProps): JSX
     
     return (  
         <div className="friend-action" >
-            { status_code !== 'none' ? 
-                <div className="nickname-wrapper" onClick={() => handleOpeningActions()}>
-                    <div className="circle"></div>
-                    <div className="status">
-                        { status_name }
-                    </div>
+            {/* { status_code !== 'none' ?  */}
+            <div className="nickname-wrapper" onClick={() => handleOpeningActions()}>
+                <div className="circle"></div>
+                <div className="status">
+                    { status_name }
                 </div>
-            : null }
+            </div>
+            {/* : null } */}
             <div className={"actions " + (isOpenActions ? 'actions-active' : '')}>
                 { actions.map((action) => 
                     <FriendActions id={id} action_code={action[0]} action_name={action[1]} />

@@ -30,7 +30,7 @@ const Login = (): JSX.Element => {
                     const response = await userServiceInstance.loginUser(userData)
                     localStorage.setItem('refresh', response.data.refresh)
                     localStorage.setItem('access', response.data.access)
-                    window.location.href = 'https://' + process.env.REACT_APP_FRONT_URL
+                    window.location.href = process.env.REACT_APP_FRONT_URL || 'https://localhost:3000'
                 } catch(error) {
                     alert("bad password or email")
                 }
@@ -62,12 +62,12 @@ const Login = (): JSX.Element => {
                             sign in
                         </span>
                     </button>
-                    <button>
-                        <Link to="/registration">
-                            registration
-                        </Link>
-                    </button>
                 </form>
+                <Link to="/registration">
+                    <button>
+                        registration
+                    </button>
+                </Link>
             </div>
       </div>
 	)

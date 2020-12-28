@@ -58,7 +58,7 @@ const Chat = (): JSX.Element => {
             try {
                 const responseChat = await userServiceInstance.getChatById(chat_id)
     
-                setChat(JSON.parse(responseChat.data))
+                setChat(responseChat.data)
     
             } catch(error) {
                 console.log(error, 'error')
@@ -72,7 +72,7 @@ const Chat = (): JSX.Element => {
             const fetchData = async () => {
                 try {
                     const responseMessages = await userServiceInstance.getMessagesByChatId(chat_id)
-                    const messages = JSON.parse(responseMessages.data)
+                    const messages = responseMessages.data
                     messages.forEach((element: IMessage) => {
                         element.is_loaded = true
                     })
@@ -184,20 +184,18 @@ const Chat = (): JSX.Element => {
             <div className="chat-header">
                 <div className='chat-logo'>
                     <img src={
-                            "http://" + process.env.REACT_APP_API_URL + "/static" + (
                             isSavedMessageChat(chat)
-                            ?  '/assets/imageProfile_Z4FecWx.png'
+                            ?  'https://yakrasava-com.s3.eu-north-1.amazonaws.com/static/Saved_Messages_icon.png'
                             :  isPrivateChat(chat)
                             ?  chat.profile.image
-                            :  null
-                            )
+                            :  ''
                         } alt='chat-logo' className="chat-logo"/>
                 </div>
                 <div className="title-and-status-container">
                     <div className="title">
                         {isSavedMessageChat(chat)
                         ?
-                        chat.name
+                        "Saved Messages"
                         :
                         isPrivateChat(chat)
                         ?

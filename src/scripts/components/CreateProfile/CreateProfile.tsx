@@ -27,29 +27,54 @@ const CreateProfile = () => {
 	const handleFormSubmit = (event: any) => {
         event.preventDefault()
         const formData: any = new FormData(event.target)
-        const [, location, gender, date_of_birth] = formData
+        const [, nickname, location, gender, date_of_birth] = formData
         const dataProfile: any = new FormData()
-        dataProfile.append('location', location[1])
-        dataProfile.append('sex', gender[1])
-        dataProfile.append('date_of_birth', date_of_birth[1])
-        dataProfile.append('image', userImageResult)
-        console.log(dataProfile.get('image')) 
-        const fetchData = async () => {
-            try {
-                const response = await userServiceInstance.createProfile(dataProfile)
-                window.location.href = "http://" + process.env.REACT_APP_FRONT_URL
-                console.log('response', response) 
-            } catch(error) {
-                console.log('error', error) 
-                if (error.data.response === 'profile is not valid') {
-                    alert("server error. Please reload page")
-                } else if (error.data.response === 'validation_error') {
-                    alert("server error. Please reload page")
+
+        const profile: any = {
+            nickname: nickname[1],
+            location: location[1],
+            gender: gender[1],
+            date_of_birth: date_of_birth[1],
+            image: userImageResult
+        }
+
+        const validation = () => {
+            let is_valid = false
+            if (profile.nickname.length < 4) {
+                alert('nickname must be more than 4 letters')
+            } else if (!/^[A-Za-z][A-Za-z0-9_]+$/.test(profile.nickname)) {
+                alert('nickname must start with letter and contain only numbers, letters and underscore') 
+            } else {
+                is_valid = true
+            }
+            return is_valid
+        }
+
+        if (validation() === true) {
+            dataProfile.append('nickname', profile.nickname)
+            dataProfile.append('location', profile.location)
+            dataProfile.append('sex', profile.gender)
+            dataProfile.append('date_of_birth', profile.date_of_birth)
+            dataProfile.append('image', profile.image, 'profile.png')
+
+            const fetchData = async () => {
+                try {
+                    const response = await userServiceInstance.createProfile(dataProfile)
+                    window.location.href = process.env.REACT_APP_FRONT_URL || 'https://localhost:3000'
+                    console.log('response', response) 
+                } catch(error) {
+                    console.log('error', error) 
+                    if (error.data.response === 'profile is not valid') {
+                        alert("server error. Please reload page")
+                    } else if (error.data.response === 'validation_error') {
+                        alert("server error. Please reload page")
+                    }
                 }
             }
+            fetchData()
         }
-        fetchData()
-   	}
+    }
+       
     
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
         let reader = new FileReader()
@@ -144,6 +169,12 @@ const CreateProfile = () => {
                                name="image"
                                onChange={ (event) => {handleImageUpload(event)}} 
                         />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        nickname
+                        <input type="text" name="nickname" required/>
                     </label>
                 </div>
                 <div>

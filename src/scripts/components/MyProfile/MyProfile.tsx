@@ -29,7 +29,7 @@ const MyProfile = (): JSX.Element => {
 		<div className="profile">
 			<div className="actions">
 				<div className="img-container">
-					<img src={"http://" + process.env.REACT_APP_API_URL + "/static" + profile.image} 
+					<img src={profile.image} 
 						width="100px" 
 						height="135px" 
 						className="my-profile" 

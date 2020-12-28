@@ -27,7 +27,7 @@ const Profile = (): JSX.Element => {
 		const fetchData = async () => {
             try {
 				const responseProfile = await userServiceInstance.getFullProfileByProfileId_authed(profile_id);
-				setUser(JSON.parse(responseProfile.data));
+				setUser(responseProfile.data);
             } catch(error) {
                 console.log(error, 'error');
             }
@@ -67,7 +67,7 @@ const Profile = (): JSX.Element => {
 	const handlerClickWriteMessage = (profile_id: number) => {
 		const fetchData = async () => {
 			try {
-				const response = await userServiceInstance.createPrivateChat(profile_id);
+				const response = await userServiceInstance.get_or_create_private_chat(profile_id);
 				// if (response.data === 'PrivateChat already exists') {
 					
 				// }
@@ -84,7 +84,7 @@ const Profile = (): JSX.Element => {
 		<div className="profile">
 			<div className="actions">
 				<div className="img-container">
-					<img src={"http://" + process.env.REACT_APP_API_URL + "/static" + user.profile.image } 
+					<img src={ user.profile.image } 
 						className="profile"
 						width="100px"
 						height="135px"
