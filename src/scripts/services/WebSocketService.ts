@@ -39,7 +39,7 @@ class WebSocketService {
         this.chats = {}
         this.current_chat = {}
         this.profiles = []
-        this.endpoint = (process.env.REACT_APP_API_WEBSOCKETS_URL || "ws://localhost:8000") + "/ws/user"
+        this.endpoint = (process.env.REACT_APP_API_WEBSOCKETS_URL || "wss://localhost:8000") + "/ws/user"
     }
 
     connect(){
@@ -70,11 +70,12 @@ class WebSocketService {
                     this.firstConnectIsFailed = true
                     this.updateAccessToken()
                 } else {
-                    alert('websocket onclose your session was over, please re sign in ')
-                    window.location.href = 'http://172.18.96.188:8000'
+                    alert('websocket onclose your session was over, please re sign in 4003')
+                    // window.location.href = 'http://172.18.96.188:8000'
                 }
             } else if (e.code === 4004) { // user not found
-                window.location.href = 'http://172.18.96.188:8000'
+                alert('4004')
+                // window.location.href = 'http://172.18.96.188'
             } else if (e.code === 1006) {
                 this.connect()
             }
