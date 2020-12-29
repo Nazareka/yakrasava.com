@@ -39,7 +39,7 @@ class WebSocketService {
         this.chats = {}
         this.current_chat = {}
         this.profiles = []
-        this.endpoint = (process.env.REACT_APP_API_WEBSOCKETS_URL || "wss://localhost:8000") + "/ws/user"
+        this.endpoint = (process.env.REACT_APP_API_WEBSOCKETS_URL || "wss://api-yakrasava.herokuapp.com") + "/ws/user"
     }
 
     connect(){
