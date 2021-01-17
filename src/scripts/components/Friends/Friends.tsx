@@ -4,11 +4,11 @@ import SearchFriendsBar from './SearchFriendsBar';
 import ReloadSearchFriendsResultsContext from '../../contexts/ReloadSearchFriendsResultsContext';
 import { useHistory } from "react-router-dom";
 import TUseState from '../../typescript/TUseState';
-import { IShortProfile } from '../../typescript/users';
 import WebSocketInstance from '../../services/WebSocketService';
 import { isEmpty } from '@martin_hotell/rex-tils';
+import { ShortProfile } from '../../apps/profile/types';
 
-type TListUsers = TUseState<never[] | IShortProfile[]>;
+type TListUsers = TUseState<never[] | ShortProfile[]>;
 
 const Friends = (): JSX.Element => {
 
@@ -20,7 +20,7 @@ const Friends = (): JSX.Element => {
     const [isDataLoaded, setIsDataLoaded] = useState(false) as TUseState<boolean>; 
 
     const [isWebsocketsConnected, setIsWebsocketsConnected] = useState(false) as TUseState<boolean>;
-    const listsUsersRef = useRef(null) as React.MutableRefObject<null | (never[] | IShortProfile[])[]>;
+    const listsUsersRef = useRef(null) as React.MutableRefObject<null | (never[] | ShortProfile[])[]>;
 
     let history = useHistory();
 

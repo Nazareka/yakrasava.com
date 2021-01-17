@@ -1,7 +1,8 @@
 import React, { useState, useRef, Fragment, useEffect, MutableRefObject } from 'react'
-import userServiceInstance from '../../services/UserService'
-import handlerCropAndMoveImage from "../../tools/handlerCropAndMoveImage"
-import TUseState from '../../typescript/TUseState'
+import userServiceInstance from '../../../services/UserService'
+import handlerCropAndMoveImage from "../../../tools/handlerCropAndMoveImage"
+import TUseState from '../../../typescript/TUseState'
+import { createProfile } from '../actions'
 
 interface handleImageCropProps { 
     canvas: MutableRefObject<HTMLCanvasElement | null>, 
@@ -56,22 +57,9 @@ const CreateProfile = () => {
             dataProfile.append('sex', profile.gender)
             dataProfile.append('date_of_birth', profile.date_of_birth)
             dataProfile.append('image', profile.image, 'profile.png')
+            
+            createProfile(dataProfile)
 
-            const fetchData = async () => {
-                try {
-                    const response = await userServiceInstance.createProfile(dataProfile)
-                    window.location.href = process.env.REACT_APP_FRONT_URL || 'https://localhost:3000'
-                    console.log('response', response) 
-                } catch(error) {
-                    console.log('error', error) 
-                    if (error.data.response === 'profile is not valid') {
-                        alert("server error. Please reload page")
-                    } else if (error.data.response === 'validation_error') {
-                        alert("server error. Please reload page")
-                    }
-                }
-            }
-            fetchData()
         }
     }
        

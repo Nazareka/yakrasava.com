@@ -1,8 +1,8 @@
 import userServiceInstance, { TUserService } from './UserService'
-import { IShortProfile, IUser } from '../typescript/users'
 import { ICurrentChat,  IUseState } from '../typescript/WebsocketServiceTypeSet'
 import { IMessage, TShortChat, IShortPrivateChat, isPrivateChat } from '../typescript/chating'
 import { isEmpty } from '@martin_hotell/rex-tils'
+import { FullProfileWithRS, ShortProfile } from '../apps/profile/types'
 
 
 class WebSocketService {
@@ -12,12 +12,12 @@ class WebSocketService {
     userService: TUserService
     firstConnectIsFailed: boolean
     setUser: null | Function
-    user: null | IUser
+    user: null | FullProfileWithRS
     auth: any
     setAuth: null | Function
     chats: {} | IUseState<TShortChat[]>
     current_chat: {} | ICurrentChat<IMessage[]>
-    profiles: never[] | IUseState<never[] | IShortProfile[]>[]
+    profiles: never[] | IUseState<never[] | ShortProfile[]>[]
     endpoint: string
 
 
@@ -68,7 +68,7 @@ class WebSocketService {
             if (e.code === 4003 ) { // invalidToken
                 if (this.firstConnectIsFailed === false) {
                     this.firstConnectIsFailed = true
-                    this.updateAccessToken()
+                    // this.updateAccessToken()
                 } else {
                     alert('websocket onclose your session was over, please re sign in 4003')
                     // window.location.href = 'http://172.18.96.188:8000'
@@ -121,7 +121,7 @@ class WebSocketService {
                 this.setUser({
                     ...this.user,
                     profile: {
-                        ...this.user?.profile,
+                        ...this.user,
                         status: status
                     }
                 })
@@ -139,7 +139,7 @@ class WebSocketService {
             if (!isEmpty(this.profiles)) {
                 this.profiles.forEach(profileStateObj => {
                     if (Object.keys(profileStateObj.state).length === 0) {
-                        const list: IShortProfile[] = profileStateObj.state
+                        const list: ShortProfile[] = profileStateObj.state
                         list.forEach((profile, index) => {
                             if (profile.id === Number(profile_id)) {
                                 list[index].status = status

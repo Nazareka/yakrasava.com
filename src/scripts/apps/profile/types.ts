@@ -1,13 +1,14 @@
-import { TStatus, TRelated } from './relashionship';
+import { TRelated, TStatus } from "../../typescript/relashionship";
 
-export interface IShortProfile {
+
+export interface ShortProfile {
     id: number,
     nickname: string,
     image: string,
     status: string
 }
 
-export interface IFullProfile {
+export interface FullProfile {
 	id: number, 
 	nickname: string, 
 	main_quote: string, 
@@ -19,8 +20,7 @@ export interface IFullProfile {
 	status: string
 }
 
-export interface IUser {
-	profile: IFullProfile
+export interface FullProfileWithRS extends FullProfile {
 	related: TRelated,
 	status: TStatus
 }

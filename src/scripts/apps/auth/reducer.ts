@@ -1,5 +1,5 @@
 import { Actions, AccessType } from './enums'
-import { AuthState } from '../../typescript/state'
+import { AuthState } from './state'
 
 
 const INITIAL_STATE: AuthState = {

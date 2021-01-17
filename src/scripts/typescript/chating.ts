@@ -1,4 +1,5 @@
-import { IShortProfile } from "./users";
+import { ShortProfile } from "../apps/profile/types";
+
 
 interface ITime {
     year: number,
@@ -45,7 +46,7 @@ interface IShortSavedMessageChat extends IShortAbstractChat {
     image: string,
 }
 export interface IShortPrivateChat extends IShortAbstractChat {
-    profile: IShortProfile
+    profile: ShortProfile
 }
 
 interface IFullSavedMessageChat extends IFullAbstractChat {
@@ -53,7 +54,7 @@ interface IFullSavedMessageChat extends IFullAbstractChat {
     image: string,
 }
 interface IFullPrivateChat extends IFullAbstractChat {
-    profile: IShortProfile
+    profile: ShortProfile
 }
 
 

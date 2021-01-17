@@ -5,8 +5,8 @@ import Login from "../components/Login/Login"
 import Registration from '../components/Registration/Registration'
 import Header from "../components/Header/Header"
 import CreateProfile from "../components/CreateProfile/CreateProfile"
-import Profile from '../components/Profile/Profile'
-import MyProfile from '../components/MyProfile/MyProfile'
+import AnProfile from '../apps/profile/pages/AnProfile'
+import MyProfile from '../apps/profile/pages/MyProfile'
 import Chats from '../components/Chats/Chats'
 import Chat from '../components/Chat/Chat'
 import UnAuthContainer from "../containers/UnAuthContainer"
@@ -30,7 +30,13 @@ export const MainRouter = (): JSX.Element => {
                 <Route exact path="/registration" >
                     <Registration />
                 </Route>
-                <Route exact path="/create_profile">
+                { authState.accessType === AccessType.AUTHORIZED_NO_PROFILE 
+                    ? <Route exact path="/create_profile" >
+                        <CreateProfile />
+                    </Route>
+                    : null
+                }
+                <Route exact path="/create_profile" >
                     <CreateProfile />
                 </Route>
                 {(
@@ -45,7 +51,7 @@ export const MainRouter = (): JSX.Element => {
                         <Switch>
                             <Route exact path="/profile_id=:profile_id" >
                                 <AuthContainer currentBlock={null}>
-                                    <Profile />
+                                    <AnProfile />
                                 </AuthContainer>
                             </Route>
                             <Route exact path="/my_profile">
@@ -77,7 +83,7 @@ export const MainRouter = (): JSX.Element => {
                     <Switch>
                         <Route exact path="/profile_id=:profile_id" >
                             <UnAuthContainer>
-                                <Profile />
+                                <AnProfile />
                             </UnAuthContainer>
                         </Route>
                         <Route exact path="/my_profile">

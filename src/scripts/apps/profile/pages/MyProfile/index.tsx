@@ -1,27 +1,15 @@
+import { useSelector } from 'react-redux';
 import React, {useEffect, useState} from 'react';
-import userServiceInstance from '../../services/UserService';
-import TUseState from '../../typescript/TUseState';
-import { IFullProfile } from '../../typescript/users';
+import { fetchFullProfileCurrentUser } from '../../actions';
 
 const MyProfile = (): JSX.Element => {
-	
-	const [profile, setProfile] = useState(null) as TUseState<null | IFullProfile>;
-
+	const profileState = useSelector(state => state.myProfile)
     useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await userServiceInstance.getFullProfileCurrentUser();
-
-				setProfile(JSON.parse(response.data));
-			} catch(error) {
-				console.log(error, 'error');
-			}
-		}
-		fetchData();
+		fetchFullProfileCurrentUser()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-    if (!profile) {
+    if (profileState === null || profileState.profile === undefined) {
         return <div> loading </div>
 	}
 	
@@ -29,22 +17,22 @@ const MyProfile = (): JSX.Element => {
 		<div className="profile">
 			<div className="actions">
 				<div className="img-container">
-					<img src={profile.image} 
+					<img src={profileState.profile.image} 
 						width="100px" 
 						height="135px" 
 						className="my-profile" 
 						alt="profile-logo" />
 				</div>
 				<div className="nickname">
-					{ profile.nickname }
+					{ profileState.profile.nickname }
 				</div>
 				<div className="status">
-					{ profile.status }
+					{ profileState.profile.status }
 				</div>
 			</div>
 			<div className="bio">
 				<div className="quote">
-					{ profile.main_quote }
+					{ profileState.profile.main_quote }
 				</div>
 				<div className="info">
 					<div>
@@ -63,23 +51,23 @@ const MyProfile = (): JSX.Element => {
 					</div>
 					<div>	
 						<div>
-						{profile.sex === "ML" 
+						{profileState.profile.sex === "ML" 
 						? "male"
-						: (profile.sex === "FM" 
+						: (profileState.profile.sex === "FM" 
 						? "female"
-						: (profile.sex === "OT" 
+						: (profileState.profile.sex === "OT" 
 						? "other"
 						: null
 						))}
 						</div>	
 						<div>
-							{ profile.date_of_birth }
+							{ profileState.profile.date_of_birth }
 						</div>
 						<div>
-							{ profile.location }
+							{ profileState.profile.location }
 						</div>
 						<div>
-							{ profile.profession }
+							{ profileState.profile.profession }
 						</div>	
 					</div>	
 				</div>					
