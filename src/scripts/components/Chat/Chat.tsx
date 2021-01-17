@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import TUseState from '../../typescript/TUseState'
 import userServiceInstance from '../../services/UserService'
 import WebSocketInstance from '../../services/WebSocketService'
-import { isPrivateChat, isSavedMessageChat, TFullChat } from '../../typescript/ChatingTypeSet'
+import { isPrivateChat, isSavedMessageChat, TFullChat } from '../../typescript/chating'
 import { isEmpty } from '@martin_hotell/rex-tils'
 
 interface ITime {

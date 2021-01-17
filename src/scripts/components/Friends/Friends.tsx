@@ -4,7 +4,7 @@ import SearchFriendsBar from './SearchFriendsBar';
 import ReloadSearchFriendsResultsContext from '../../contexts/ReloadSearchFriendsResultsContext';
 import { useHistory } from "react-router-dom";
 import TUseState from '../../typescript/TUseState';
-import { IShortProfile } from '../../typescript/usersProfileTypeSet';
+import { IShortProfile } from '../../typescript/users';
 import WebSocketInstance from '../../services/WebSocketService';
 import { isEmpty } from '@martin_hotell/rex-tils';
 

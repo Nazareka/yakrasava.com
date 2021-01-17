@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import userServiceInstance from '../../services/UserService';
 import TUseState from '../../typescript/TUseState';
-import { IFullProfile } from '../../typescript/usersProfileTypeSet';
+import { IFullProfile } from '../../typescript/users';
 
 const MyProfile = (): JSX.Element => {
 	

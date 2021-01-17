@@ -4,7 +4,7 @@ import TUseState from '../../typescript/TUseState'
 import WebSocketInstance from '../../services/WebSocketService'
 import { useHistory } from 'react-router-dom'
 import ProfileIdContext from '../../contexts/ProfileIdContext'
-import { isSavedMessageChat, isPrivateChat, TShortChat } from '../../typescript/ChatingTypeSet'
+import { isSavedMessageChat, isPrivateChat, TShortChat } from '../../typescript/chating'
 import { isEmpty } from '@martin_hotell/rex-tils'
 
 type TChats = TUseState<null | TShortChat[]>

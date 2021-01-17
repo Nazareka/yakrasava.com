@@ -5,7 +5,7 @@ import FriendDropdown from '../Friends/FriendDropdown';
 import ReloadProfileContext from '../../contexts/ReloadProfileContext';
 import WebSocketInstance from '../../services/WebSocketService';
 import TUseState from '../../typescript/TUseState';
-import { IUser } from '../../typescript/usersProfileTypeSet';
+import { IUser } from '../../typescript/users';
 
 
 interface IParamsProfileID {

@@ -1,4 +1,4 @@
-import { IShortProfile } from "./usersProfileTypeSet";
+import { IShortProfile } from "./users";
 
 interface ITime {
     year: number,

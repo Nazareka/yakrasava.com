@@ -3,7 +3,7 @@ import FriendActions from './FriendActions';
 import getActionsByStatus from '../../tools/getActionsByStatus';
 import getStatusNameByStatusCode from '../../tools/getStatusNameByStatusCode';
 import TUseState from '../../typescript/TUseState';
-import { TRelated, TStatus } from '../../typescript/relashionshipTypeSet';
+import { TRelated, TStatus } from '../../typescript/relashionship';
 
 
 interface IFriendDropdownProps {

@@ -1,4 +1,4 @@
-import { TRelated, TStatus } from "../typescript/relashionshipTypeSet"
+import { TRelated, TStatus } from "../typescript/relashionship"
 
 
 interface IAtrGetActionsByStatus {

@@ -1,12 +1,5 @@
-import { TStatus, TRelated } from './relashionshipTypeSet';
+import { TStatus, TRelated } from './relashionship';
 
-export interface IAuth {
-	isAuthOver: boolean,
-	isLoggedIn: boolean,
-	profile_id: null | number,
-	networkError: boolean,
-	isWebSocketConnected: boolean
-}
 export interface IShortProfile {
     id: number,
     nickname: string,

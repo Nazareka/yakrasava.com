@@ -1,4 +1,4 @@
-import { TRelated, TStatus } from "../typescript/relashionshipTypeSet"
+import { TRelated, TStatus } from "../typescript/relashionship"
 
 interface getStatusNameByStatusCodeProps {
     status_code: TStatus,

@@ -1,7 +1,7 @@
 import userServiceInstance, { TUserService } from './UserService'
-import { IAuth, IShortProfile, IUser } from '../typescript/usersProfileTypeSet'
+import { IShortProfile, IUser } from '../typescript/users'
 import { ICurrentChat,  IUseState } from '../typescript/WebsocketServiceTypeSet'
-import { IMessage, TShortChat, IShortPrivateChat, isPrivateChat } from '../typescript/ChatingTypeSet'
+import { IMessage, TShortChat, IShortPrivateChat, isPrivateChat } from '../typescript/chating'
 import { isEmpty } from '@martin_hotell/rex-tils'
 
 
@@ -13,7 +13,7 @@ class WebSocketService {
     firstConnectIsFailed: boolean
     setUser: null | Function
     user: null | IUser
-    auth: null | IAuth
+    auth: any
     setAuth: null | Function
     chats: {} | IUseState<TShortChat[]>
     current_chat: {} | ICurrentChat<IMessage[]>
